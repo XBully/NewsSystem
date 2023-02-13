@@ -3,9 +3,9 @@
   registry: 'https://registry.npmmirror.com',
   pkgs: [
     {
-      name: '@ant-design/icons',
-      version: '5.1.7',
-      type: 'version',
+      name: 'tsparticles-engine',
+      version: 'latest',
+      type: 'tag',
       alias: undefined,
       arg: [Result]
     }
@@ -15,7 +15,7 @@
   cacheDir: null,
   env: {
     npm_config_registry: 'https://registry.npmmirror.com',
-    npm_config_argv: '{"remain":[],"cooked":["--fix-bug-versions","--china","--userconfig=C:\\\\Users\\\\lxt\\\\.cnpmrc","--disturl=https://npmmirror.com/mirrors/node","--registry=https://registry.npmmirror.com","@ant-design/icons@5.1.7"],"original":["--fix-bug-versions","--china","--userconfig=C:\\\\Users\\\\lxt\\\\.cnpmrc","--disturl=https://npmmirror.com/mirrors/node","--registry=https://registry.npmmirror.com","@ant-design/icons@5.1.7"]}',
+    npm_config_argv: '{"remain":[],"cooked":["--fix-bug-versions","--china","--userconfig=C:\\\\Users\\\\lxt\\\\.cnpmrc","--disturl=https://npmmirror.com/mirrors/node","--registry=https://registry.npmmirror.com","tsparticles-engine"],"original":["--fix-bug-versions","--china","--userconfig=C:\\\\Users\\\\lxt\\\\.cnpmrc","--disturl=https://npmmirror.com/mirrors/node","--registry=https://registry.npmmirror.com","tsparticles-engine"]}',
     npm_config_user_agent: 'npminstall/7.4.2 npm/? node/v16.17.1 win32 x64',
     NODE: 'C:\\Program Files\\nodejs\\node.exe',
     npm_node_execpath: 'C:\\Program Files\\nodejs\\node.exe',

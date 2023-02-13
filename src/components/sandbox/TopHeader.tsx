@@ -1,25 +1,31 @@
 import { useState } from 'react';
-import { Layout,Avatar } from 'antd';
-import { MenuFoldOutlined, MenuUnfoldOutlined,UserOutlined,DownOutlined } from '@ant-design/icons';
+import { Layout,Avatar, Dropdown } from 'antd';
+import { MenuFoldOutlined, MenuUnfoldOutlined,UserOutlined } from '@ant-design/icons';
 import type { MenuProps } from 'antd';
-import { Dropdown, Space } from 'antd';
+import { useHistory } from 'umi';
 
 const { Header } = Layout;
 
 export default function TopHeader() {
   const [collapsed, setCollapsed] = useState(false);
+  const history= useHistory()
   const changeCollapsed = () => {
     setCollapsed(!collapsed);
   };
+  const {role:{roleName},username} = JSON.parse(localStorage.getItem('token')||'')
   const items: MenuProps['items'] = [
     {
       key: '1',
-      label: '超级管理员'
+      label: roleName
     },
     {
       key: '2',
       danger: true,
       label: '退出',
+      onClick: () => {
+        localStorage.removeItem('token')
+        history.push('/login')
+      }
     },
   ];
 
@@ -31,7 +37,7 @@ export default function TopHeader() {
         <MenuFoldOutlined onClick={changeCollapsed} />
       )}
       <div style={{ float: 'right' }}>
-        <span>欢迎admin回来</span>
+        <span>欢迎<b style={{color:"blue"}}>{username}</b>回来</span>
         <Dropdown menu={{ items }}>
           <Avatar size="large" icon={<UserOutlined />} />
         </Dropdown>

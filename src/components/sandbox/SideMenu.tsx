@@ -30,8 +30,9 @@ export default function SideMenu() {
   const history = useHistory();
   const selectKyes = useLocation().pathname
   const openKeys = ['/'+selectKyes.split('/')[1]]
+  const {role:{rights}}=JSON.parse(localStorage.getItem('token')||'')
   const checkPagePermisson = (item: any) => {
-    return item.pagepermisson === 1;
+    return item.pagepermisson && rights.includes(item.key)
   };
   const iconList: any = {
     // '/home': <HomeOutlined/>,

@@ -19,12 +19,29 @@ export default function userlist() {
   const [regionList, setregionList]: Array<any> = useState([]);
   const addForm: any = useRef(null);
   const updateForm: any = useRef(null);
+  const { roleId, region,username } = JSON.parse(localStorage.getItem('token') || '');
 
   useEffect(() => {
+    const roleObj: any = {
+      '1': 'superAdmin',
+      '2': 'admin',
+      '3': 'editor',
+    };
     axios.get('http://localhost:5000/users?_expand=role').then((res) => {
-      setdataSource(res.data);
+      const list = res.data;
+      setdataSource(
+        roleObj[roleId] === 'superAdmin'
+          ? list
+          : [
+              ...list.filter((item: any) => item.username === username),
+              ...list.filter(
+                (item: any) =>
+                  item.region === region && roleObj[item.roleId] === 'editor',
+              ),
+            ],
+      );
     });
-  }, []);
+  }, [roleId, region,username]);
   useEffect(() => {
     axios.get('http://localhost:5000/roles').then((res) => {
       setroleList(res.data);
@@ -45,15 +62,15 @@ export default function userlist() {
           value: item.value,
         })),
         {
-          text:"全球",
-          value:"全球"
-        }
+          text: '全球',
+          value: '全球',
+        },
       ],
-      onFilter: (value:any, item:any) => {
-        if(value==="全球"){
-          return item.region==="";
+      onFilter: (value: any, item: any) => {
+        if (value === '全球') {
+          return item.region === '';
         }
-        return item.region === value
+        return item.region === value;
       },
       render: (region: string) => {
         return <b>{region === '' ? '全球' : region}</b>;
@@ -122,11 +139,10 @@ export default function userlist() {
       .then((value: any) => {
         setIsAddModalOpen(false);
         addForm.current.resetFields();
-        axios
-          .post(`http://localhost:5000/users`, {
+        axios.post(`http://localhost:5000/users`, {
             ...value,
-            rolestate: true,
-            default: false,
+            default:false,
+            roleState: false,
           })
           .then((res) => {
             setdataSource([
@@ -168,7 +184,7 @@ export default function userlist() {
     item.roleState = !item.roleState;
     setdataSource([...dataSource]);
     axios.patch(`http://localhost:5000/users/${item.id}`, {
-      rolestate: item.roleState,
+      roleState: item.roleState,
     });
   };
   const handleUpdate = (item: any) => {
@@ -225,7 +241,7 @@ export default function userlist() {
       </Modal>
       <Modal
         title="更新用户"
-        okText="跟新"
+        okText="更新"
         cancelText="取消"
         open={isUpdateModalOpen}
         onOk={updateFormOk}
@@ -238,6 +254,7 @@ export default function userlist() {
           roleList={roleList}
           ref={updateForm}
           isUpdateDisabled={isUpdateDisabled}
+          isUpdate={true}
         />
       </Modal>
     </div>

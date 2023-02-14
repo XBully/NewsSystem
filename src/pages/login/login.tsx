@@ -143,6 +143,7 @@ export default function Login() {
               type="primary"
               htmlType="submit"
               className="login-form-button"
+              style={{width:'100%'}}
             >
               登录
             </Button>

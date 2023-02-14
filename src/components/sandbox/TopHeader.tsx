@@ -37,7 +37,7 @@ export default function TopHeader() {
         <MenuFoldOutlined onClick={changeCollapsed} />
       )}
       <div style={{ float: 'right' }}>
-        <span>欢迎<b style={{color:"blue"}}>{username}</b>回来</span>
+        <span>欢迎<b style={{color:"skyblue"}}>{username}</b>回来</span>
         <Dropdown menu={{ items }}>
           <Avatar size="large" icon={<UserOutlined />} />
         </Dropdown>

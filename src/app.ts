@@ -12,6 +12,8 @@ import AuditList from '@/pages/sandbox/audit-manage/auditlist';
 import Unpublished from '@/pages/sandbox/publish-manage/unpublished';
 import Published from '@/pages/sandbox/publish-manage/published';
 import Sunset from '@/pages/sandbox/publish-manage/sunset';
+import NewsPreview from './pages/sandbox/news-manage/newspreview';
+import NewsUpdate from './pages/sandbox/news-manage/newsupdate';
 let routesData: any = [];
 const LocalRouterMap:any = {
   '/home': Home,
@@ -21,7 +23,8 @@ const LocalRouterMap:any = {
   '/news-manage/add': NewsAdd,
   '/news-manage/draft': NewsDraft,
   '/news-manage/category': NewsCategory,
-  '/news-manage/update/:id': NewsAdd,
+  '/news-manage/preview/:id': NewsPreview,
+  '/news-manage/update/:id': NewsUpdate,
   '/audit-manage/audit': Audit,
   '/audit-manage/list': AuditList,
   '/publish-manage/unpublished': Unpublished,

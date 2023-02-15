@@ -15,13 +15,12 @@ import NewsEditor from '@/components/news-manage/NewsEditor';
 import { history } from 'umi';
 const { Option } = Select;
 
-export default function newsadd() {
+export default function newsadd(props: any) {
   const [current, setcurrent] = useState(0);
   const [categoryList, setcategoryList] = useState([]);
   const NewsForm: any = useRef(null);
   const [formInfo, setFormInfo] = useState({});
   const [content, setContent] = useState('');
-  const User = JSON.parse(localStorage.getItem('token') || '');
   const handleNext = () => {
     if (current === 0) {
       NewsForm.current
@@ -49,20 +48,26 @@ export default function newsadd() {
       setcategoryList(res.data);
     });
   }, []);
+  useEffect(() => {
+    axios
+      .get(
+        `http://localhost:5000/news/${props.match.params.id}?_expand=category&_expand=role`,
+      )
+      .then((res: any) => {
+        let {title,categoryId,content} =res.data;
+        NewsForm.current.setFieldsValue({
+          title,
+          categoryId
+        });
+        setContent(content)
+      });
+  });
   const handleSave = (auditState: number) => {
     axios
-      .post('http://localhost:5000/news', {
+      .patch(`http://localhost:5000/news/${props.match.params.id}`, {
         ...formInfo,
         content: content,
-        region: User.region ? User.region : '全球',
-        author: User.username,
-        roleId: User.roleId,
         auditState: auditState,
-        publishState: 0,
-        createTime: Date.now(),
-        star: 0,
-        view: 0,
-        publishTime: 0,
       })
       .then((res) => {
         history.push(
@@ -80,7 +85,11 @@ export default function newsadd() {
   };
   return (
     <div>
-      <PageHeader className="site-page-header" title="撰写新闻" />
+      <PageHeader
+        className="site-page-header"
+        title="更新新闻"
+        onBack={() => window.history.back()}
+      />
       <Steps
         current={current}
         items={[
@@ -137,6 +146,7 @@ export default function newsadd() {
             getContent={(value: any) => {
               setContent(value);
             }}
+            content={content}
           />
         </div>
         <div className={current === 2 ? '' : style.hidden}></div>

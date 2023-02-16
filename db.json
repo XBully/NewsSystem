@@ -555,8 +555,8 @@
       "region": "全球",
       "author": "admin",
       "roleId": 1,
-      "auditState": 3,
-      "publishState": 0,
+      "auditState": 2,
+      "publishState": 2,
       "createTime": 1652768121161,
       "star": 0,
       "view": 0,
@@ -611,7 +611,7 @@
       "region": "全球",
       "author": "admin",
       "roleId": 1,
-      "auditState": 0,
+      "auditState": 1,
       "publishState": 0,
       "createTime": 1652768200175,
       "star": 0,
@@ -625,12 +625,13 @@
       "region": "全球",
       "author": "admin",
       "roleId": 1,
-      "auditState": 0,
+      "auditState": 3,
       "publishState": 0,
       "createTime": 1652768200526,
       "star": 0,
       "view": 0,
-      "id": 23
+      "id": 23,
+      "pushlishState": 0
     },
     {
       "title": "admin的燃烧温度2500℃",
@@ -653,7 +654,7 @@
       "region": "全球",
       "author": "admin",
       "roleId": 1,
-      "auditState": 3,
+      "auditState": 1,
       "publishState": 0,
       "createTime": 1652769015597,
       "star": 0,
@@ -667,7 +668,7 @@
       "region": "全球",
       "author": "admin",
       "roleId": 1,
-      "auditState": 3,
+      "auditState": 1,
       "publishState": 0,
       "createTime": 1652769428443,
       "star": 0,
@@ -823,19 +824,20 @@
       "publishTime": 1653302909916
     },
     {
-      "title": "123456",
-      "categoryId": 1,
-      "content": "<p>这是一篇很重要的报道！</p>\n",
+      "title": "1231",
+      "categoryId": 2,
+      "content": "<p>213131313</p>\n",
       "region": "全球",
       "author": "admin",
       "roleId": 1,
-      "auditState": 0,
+      "auditState": 2,
       "publishState": 0,
-      "createTime": 1676457348678,
+      "createTime": 1676529835731,
       "star": 0,
       "view": 0,
       "publishTime": 0,
-      "id": 39
+      "id": 40,
+      "pushlishState": 1
     }
   ]
 }

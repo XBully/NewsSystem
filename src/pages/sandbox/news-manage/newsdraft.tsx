@@ -1,4 +1,4 @@
-import { Table, Button, Modal } from 'antd';
+import { Table, Button, Modal, notification } from 'antd';
 import { useEffect, useState } from 'react';
 import {
   DeleteOutlined,
@@ -24,9 +24,9 @@ export default function newsdraft() {
     {
       title: '新闻标题',
       dataIndex: 'title',
-      render:(title:string,item:any)=>{
-        return <a href={`#/news-manage/preview/${item.id}`}>{title}</a>
-      }
+      render: (title: string, item: any) => {
+        return <a href={`#/news-manage/preview/${item.id}`}>{title}</a>;
+      },
     },
     {
       title: '作者',
@@ -48,14 +48,22 @@ export default function newsdraft() {
               shape="circle"
               danger
               icon={<DeleteOutlined />}
-              onClick={() => {showConfirm(item);}}
+              onClick={() => {
+                showConfirm(item);
+              }}
             />
-            <Button shape="circle" icon={<EditOutlined />} onClick={() => {handleUpdate(item);}} />
+            <Button
+              shape="circle"
+              icon={<EditOutlined />}
+              onClick={() => {
+                handleUpdate(item);
+              }}
+            />
             <Button
               shape="circle"
               type="primary"
               icon={<UploadOutlined />}
-              onClick={() => {}}
+              onClick={() => handleCheck(item.id)}
             />
           </div>
         );
@@ -80,6 +88,20 @@ export default function newsdraft() {
   };
   const handleUpdate = (item: any) => {
     history.push(`/news-manage/update/${item.id}`);
+  };
+  const handleCheck = (id: number) => {
+    axios
+      .patch(`http://localhost:5000/news/${id}`, {
+        auditState: 1,
+      })
+      .then(res => {
+        history.push('/audit-manage/list');
+        notification.info({
+          message: '通知',
+          description: `您可以到审核列表中查看您的新闻`,
+          placement: 'bottomRight',
+        });
+      });
   };
   useEffect(() => {
     axios

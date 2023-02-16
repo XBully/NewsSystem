@@ -78,6 +78,7 @@ export default function auditlist() {
     axios
       .patch(`http://localhost:5000/news/${item.id}`, {
         "publishState": 2,
+        "publishTime":Date.now()
       })
       .then((res) => {
         history.push('/publish-manage/published');

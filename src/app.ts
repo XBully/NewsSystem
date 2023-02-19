@@ -1,4 +1,4 @@
-import axios from 'axios';
+import axios from '@/conf/axiosConf';
 import { request, history } from 'umi';
 import Home from '@/pages/sandbox/home/home';
 import Userlist from '@/pages/sandbox/user-manage/userlist';
@@ -14,8 +14,46 @@ import Published from '@/pages/sandbox/publish-manage/published';
 import Sunset from '@/pages/sandbox/publish-manage/sunset';
 import NewsPreview from './pages/sandbox/news-manage/newspreview';
 import NewsUpdate from './pages/sandbox/news-manage/newsupdate';
+
+import { persistStore, persistReducer } from 'redux-persist';
+import storage from 'redux-persist/es/storage/session';
+
+const persistConfig = {
+  key: 'root',
+  storage,
+};
+
+const persistEnhancer =
+  () =>
+  (createStore: any) =>
+  (reducer: any, initialState: any, enhancer: any) => {
+    const store = createStore(
+      persistReducer(persistConfig, reducer),
+      initialState,
+      enhancer,
+    );
+    const persist = persistStore(store, null);
+    return {
+      persist,
+      ...store,
+    };
+  };
+
+export const dva =
+  process.env.APP_TYPE === 'build'
+    ? {
+        config: {
+          extraEnhancers: [persistEnhancer()],
+        },
+      }
+    : {
+        config: {
+          extraEnhancers: [persistEnhancer()],
+        }
+      };
+
 let routesData: any = [];
-const LocalRouterMap:any = {
+const LocalRouterMap: any = {
   '/home': Home,
   '/user-manage/list': Userlist,
   '/right-manage/role/list': Rolelist,
@@ -31,35 +69,42 @@ const LocalRouterMap:any = {
   '/publish-manage/published': Published,
   '/publish-manage/sunset': Sunset,
 };
-const {role:{rights}} = JSON.parse(localStorage.getItem('token')||'')
-const CheckRoute = (item:any) => {
-  return LocalRouterMap[item.key] && (item.pagepermisson || item.routepermisson)
-}
-const checkUserPermission = (item:any) => {
-  return rights.includes(item.key)
-}
+const {
+  role: { rights },
+} = JSON.parse(localStorage.getItem('token') || '');
+const CheckRoute = (item: any) => {
+  return (
+    LocalRouterMap[item.key] && (item.pagepermisson || item.routepermisson)
+  );
+};
+const checkUserPermission = (item: any) => {
+  return rights.includes(item.key);
+};
 export const render = async (oldRender: any) => {
   const isLogin = await request('@/warrpers/auth');
   if (!isLogin) {
     history.push('/login');
   } else {
-  await Promise.all([
-      axios.get('http://localhost:5000/rights'),
-      axios.get('http://localhost:5000/children'),
-    ]).then((res) => {
-      routesData = [...res[0].data, ...res[1].data];
-    });
+    await Promise.all([axios.get('/rights'), axios.get('/children')]).then(
+      (res) => {
+        routesData = [...res[0].data, ...res[1].data];
+      },
+    );
   }
   oldRender();
 };
-const newRoutes:any=[]
+const newRoutes: any = [];
 const filterRoutes = (routesData: any) => {
   routesData?.map((item: any) => {
-    if(CheckRoute(item) && checkUserPermission(item)) {
-      newRoutes.push([{path:item.key,component:LocalRouterMap[item.key],exact:true}]);
-      filterRoutes([{path:item.key,component:LocalRouterMap[item.key],exact:true}]);
+    if (CheckRoute(item) && checkUserPermission(item)) {
+      newRoutes.push([
+        { path: item.key, component: LocalRouterMap[item.key], exact: true },
+      ]);
+      filterRoutes([
+        { path: item.key, component: LocalRouterMap[item.key], exact: true },
+      ]);
     }
-  })
+  });
 };
 
 export function patchRoutes({ routes }: any) {

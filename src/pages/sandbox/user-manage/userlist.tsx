@@ -27,7 +27,7 @@ export default function userlist() {
       '2': 'admin',
       '3': 'editor',
     };
-    axios.get('http://localhost:5000/users?_expand=role').then((res) => {
+    axios.get('/users?_expand=role').then((res) => {
       const list = res.data;
       setdataSource(
         roleObj[roleId] === 'superAdmin'
@@ -43,12 +43,12 @@ export default function userlist() {
     });
   }, [roleId, region,username]);
   useEffect(() => {
-    axios.get('http://localhost:5000/roles').then((res) => {
+    axios.get('/roles').then((res) => {
       setroleList(res.data);
     });
   }, []);
   useEffect(() => {
-    axios.get('http://localhost:5000/regions').then((res) => {
+    axios.get('/regions').then((res) => {
       setregionList(res.data);
     });
   }, []);
@@ -139,7 +139,7 @@ export default function userlist() {
       .then((value: any) => {
         setIsAddModalOpen(false);
         addForm.current.resetFields();
-        axios.post(`http://localhost:5000/users`, {
+        axios.post(`/users`, {
             ...value,
             default:false,
             roleState: false,
@@ -178,12 +178,12 @@ export default function userlist() {
   };
   const deletMethod = (item: any) => {
     setdataSource(dataSource.filter((data: any) => data.id !== item.id));
-    axios.delete(`http://localhost:5000/users/${item.id}`);
+    axios.delete(`/users/${item.id}`);
   };
   const handleChange = (item: any) => {
     item.roleState = !item.roleState;
     setdataSource([...dataSource]);
-    axios.patch(`http://localhost:5000/users/${item.id}`, {
+    axios.patch(`/users/${item.id}`, {
       roleState: item.roleState,
     });
   };
@@ -215,7 +215,7 @@ export default function userlist() {
         }),
       );
       setIsUpdateDisabled(!isUpdateDisabled);
-      axios.patch(`http://localhost:5000/users/${currentId}`, value);
+      axios.patch(`/users/${currentId}`, value);
     });
   };
   return (

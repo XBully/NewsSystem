@@ -44,14 +44,14 @@ export default function newsadd(props: any) {
     setcurrent(current - 1);
   };
   useEffect(() => {
-    axios('http://localhost:5000/categories').then((res) => {
+    axios('/categories').then((res) => {
       setcategoryList(res.data);
     });
   }, []);
   useEffect(() => {
     axios
       .get(
-        `http://localhost:5000/news/${props.match.params.id}?_expand=category&_expand=role`,
+        `/news/${props.match.params.id}?_expand=category&_expand=role`,
       )
       .then((res: any) => {
         let {title,categoryId,content} =res.data;
@@ -64,7 +64,7 @@ export default function newsadd(props: any) {
   });
   const handleSave = (auditState: number) => {
     axios
-      .patch(`http://localhost:5000/news/${props.match.params.id}`, {
+      .patch(`/news/${props.match.params.id}`, {
         ...formInfo,
         content: content,
         auditState: auditState,

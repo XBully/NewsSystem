@@ -60,7 +60,7 @@ export default function auditlist() {
   const handleRervert = (item: any) => {
     setdataSource(dataSource.filter((data: any) => data.id !== item.id));
     axios
-      .patch(`http://localhost:5000/news/${item.id}`, {
+      .patch(`/news/${item.id}`, {
         auditState: 0,
       })
       .then((res) => {
@@ -76,7 +76,7 @@ export default function auditlist() {
   };
   const handlePublish = (item: any) => {
     axios
-      .patch(`http://localhost:5000/news/${item.id}`, {
+      .patch(`/news/${item.id}`, {
         "publishState": 2,
         "publishTime":Date.now()
       })
@@ -93,7 +93,7 @@ export default function auditlist() {
   useEffect(() => {
     axios
       .get(
-        `http://localhost:5000/news?author=${username}&auditState_ne=0&publishState_lte=1&_expand=category`,
+        `/news?author=${username}&auditState_ne=0&publishState_lte=1&_expand=category`,
       )
       .then((res) => {
         setdataSource(res.data);

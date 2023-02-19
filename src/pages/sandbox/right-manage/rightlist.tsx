@@ -12,7 +12,7 @@ const { confirm } = Modal;
 export default function rightlist() {
   const [dataSource, setdataSource] = useState([]);
   useEffect(() => {
-    axios.get('http://localhost:5000/rights?_embed=children').then((res) => {
+    axios.get('/rights?_embed=children').then((res) => {
       res.data.forEach((item: any) => {
         if (item.children.length === 0) {
           item.children = '';
@@ -38,7 +38,7 @@ export default function rightlist() {
   const deletMethod = (item: any) => {
     if (item.grade === 1) {
       setdataSource(dataSource.filter((data: any) => data.id !== item.id));
-      axios.delete(`http://localhost:5000/rights/${item.id}`);
+      axios.delete(`/rights/${item.id}`);
     } else if (item.grade === 2) {
       let list: any = dataSource.filter(
         (data: any) => data.id === item.rightId,
@@ -47,7 +47,7 @@ export default function rightlist() {
         (data: any) => data.id !== item.id,
       );
       setdataSource(dataSource);
-      axios.delete(`http://localhost:5000/children/${item.id}`);
+      axios.delete(`/children/${item.id}`);
     }
   };
 
@@ -55,9 +55,9 @@ export default function rightlist() {
     item.pagepermisson = item.pagepermisson===1?0:1
     setdataSource([...dataSource])
     if(item.grade===1){
-      axios.patch(`http://localhost:5000/rights/${item.id}`,{pagepermisson:item.pagepermisson})
+      axios.patch(`/rights/${item.id}`,{pagepermisson:item.pagepermisson})
     }else if(item.grade===2){
-      axios.patch(`http://localhost:5000/children/${item.id}`,{pagepermisson:item.pagepermisson})
+      axios.patch(`/children/${item.id}`,{pagepermisson:item.pagepermisson})
     }
   }
 

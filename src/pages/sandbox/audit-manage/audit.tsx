@@ -14,7 +14,7 @@ export default function audit() {
     };
     axios
       .get(
-        `http://localhost:5000/news?auditState=1&_expand=category`,
+        `/news?auditState=1&_expand=category`,
       )
       .then((res) => {
         const list = res.data;
@@ -64,7 +64,7 @@ export default function audit() {
   ];
   const handleAudit = (item:any,auditState:number,pushlishState:number) => {
     setdataSource(dataSource.filter((data:any)=>data.id !== item.id))
-    axios.patch(`http://localhost:5000/news/${item.id}`,{
+    axios.patch(`/news/${item.id}`,{
       auditState,
       pushlishState
     }).then(res=>{

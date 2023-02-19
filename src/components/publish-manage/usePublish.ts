@@ -8,7 +8,7 @@ function usePublish(type: number) {
   useEffect(() => {
     axios
       .get(
-        `http://localhost:5000/news?${username}&publishState=${type}&_expand=category`,
+        `/news?${username}&publishState=${type}&_expand=category`,
       )
       .then((res) => {
         setdataSource(res.data);
@@ -17,7 +17,7 @@ function usePublish(type: number) {
   const handlePublish = (id: number) => {
     setdataSource(dataSource.filter((item: any) => item.id !== id));
     axios
-      .patch(`http://localhost:5000/news/${id}`, {
+      .patch(`/news/${id}`, {
         publishState: 2,
         publishTime: Date.now(),
       })
@@ -32,7 +32,7 @@ function usePublish(type: number) {
   const handleSunset = (id: number) => {
     setdataSource(dataSource.filter((item: any) => item.id !== id));
     axios
-      .patch(`http://localhost:5000/news/${id}`, {
+      .patch(`/news/${id}`, {
         publishState: 3,
       })
       .then((res) => {
@@ -45,7 +45,7 @@ function usePublish(type: number) {
   };
   const handleDelet = (id: number) => {
     setdataSource(dataSource.filter((item: any) => item.id !== id));
-    axios.delete(`http://localhost:5000/news/${id}`).then((res) => {
+    axios.delete(`/news/${id}`).then((res) => {
       notification.info({
         message: '删除成功',
         description: `您已经删除了已下线的新闻`,

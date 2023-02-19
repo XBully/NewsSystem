@@ -8,7 +8,7 @@ export default function newspreview(props: any) {
   useEffect(() => {
     axios
       .get(
-        `http://localhost:5000/news/${props.match.params.id}?_expand=category&_expand=role`,
+        `/news/${props.match.params.id}?_expand=category&_expand=role`,
       )
       .then((res) => {
         setNewsInfo(res.data);

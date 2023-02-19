@@ -32,7 +32,7 @@ export default function rolelist() {
       return item
     })
     setdataSource(NewData)
-    axios.patch(`http://localhost:5000/roles${currentId}`,{rights:currentRights})
+    axios.patch(`/roles${currentId}`,{rights:currentRights})
   };
 
   const handleCancel = () => {
@@ -79,15 +79,15 @@ export default function rolelist() {
     },
   ];
   useEffect(() => {
-    axios.get('http://localhost:5000/roles').then((res) => {
+    axios.get('/roles').then((res) => {
       setdataSource(res.data);
     });
   }, []);
   useEffect(()=>{
-    axios.get('http://localhost:5000/rights?_embed=children').then(res=>{
+    axios.get('/rights?_embed=children').then(res=>{
       setrightList(res.data)
     })
-  })
+  },[])
   const showConfirm = (item: any) => {
     confirm({
       title: '你确定要删除吗？',
@@ -102,7 +102,7 @@ export default function rolelist() {
   };
   const deletMethod = (item: any) => {
     setdataSource(dataSource.filter((data: any) => data.id !== item.id));
-    axios.delete(`http://localhost:5000/roles/${item.id}`);
+    axios.delete(`/roles/${item.id}`);
   };
   const onCheck=(checkKeys:any)=>{
     setcurrentRighsts(checkKeys.checked)

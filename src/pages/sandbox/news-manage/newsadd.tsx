@@ -45,13 +45,13 @@ export default function newsadd() {
     setcurrent(current - 1);
   };
   useEffect(() => {
-    axios('http://localhost:5000/categories').then((res) => {
+    axios('/categories').then((res) => {
       setcategoryList(res.data);
     });
   }, []);
   const handleSave = (auditState: number) => {
     axios
-      .post('http://localhost:5000/news', {
+      .post('/news', {
         ...formInfo,
         content: content,
         region: User.region ? User.region : '全球',

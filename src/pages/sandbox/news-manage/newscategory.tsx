@@ -11,7 +11,7 @@ const EditableContext = React.createContext<FormInstance<any> | null>(null);
 export default function newscategory() {
   const [dataSource, setdataSource]: any = useState([]);
   useEffect(() => {
-    axios.get(`http://localhost:5000/categories`).then((res) => {
+    axios.get(`/categories`).then((res) => {
       setdataSource(res.data);
     });
   }, []);
@@ -52,7 +52,7 @@ export default function newscategory() {
   ];
   const deletMethod = (item: any) => {
     setdataSource(dataSource.filter((data: any) => data.id !== item.id));
-    axios.delete(`http://localhost:5000/categories/${item.id}`);
+    axios.delete(`/categories/${item.id}`);
   };
   const showConfirm = (item: any) => {
     confirm({
@@ -77,7 +77,7 @@ export default function newscategory() {
       }
       return item
     }))
-    axios.patch(`http://localhost:5000/categories/${record.id}`,{
+    axios.patch(`/categories/${record.id}`,{
       title:record.title,
       value:record.value
     })

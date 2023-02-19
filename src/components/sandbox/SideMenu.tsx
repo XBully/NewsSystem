@@ -1,10 +1,10 @@
-import { Layout, Menu } from 'antd';
+import { Layout, Menu,} from 'antd';
 import type { MenuProps } from 'antd';
 import '@/components/sandbox/index.css';
 import { useEffect, useState } from 'react';
-import { useHistory, useLocation } from 'umi';
-import axios from 'axios';
-// import { UserOutlined,HomeOutlined } from '@ant-design/icons';
+import { connect, useHistory, useLocation } from 'umi';
+import axios from '@/conf/axiosConf';
+import { UserOutlined,HomeOutlined } from '@ant-design/icons';
 import '@/app.css'
 
 const { Sider } = Layout;
@@ -25,7 +25,8 @@ function getItem(
     type,
   } as MenuItem;
 }
-export default function SideMenu() {
+function SideMenu(props:any) {
+  const { isCollapsed } = props;
   const [NewItems, setNewItems] = useState([]);
   const history = useHistory();
   const selectKyes = useLocation().pathname
@@ -60,13 +61,13 @@ export default function SideMenu() {
   };
   const items: MenuProps['items'] = NewItems;
   useEffect(() => {
-    axios.get('http://localhost:5000/rights?_embed=children').then((res) => {
+    axios.get('/rights?_embed=children').then((res) => {
       setNewItems(setMenuOption(res.data));
     });
   }, []);
 
   return (
-    <Sider trigger={null} collapsible collapsed={false}>
+    <Sider trigger={null} collapsible collapsed={isCollapsed}>
       <div style={{ display: 'flex', height: '100%', flexDirection: 'column' }}>
         <div className="logo">新闻发布管理系统</div>
         <div style={{ flex: 1, overflow: 'auto' }}>
@@ -85,3 +86,9 @@ export default function SideMenu() {
     </Sider>
   );
 }
+const mapStateToProps = (state: any) => {
+  return {
+    isCollapsed: state.CollapsedModel.collapsed,
+  };
+};
+export default connect(mapStateToProps)(SideMenu)

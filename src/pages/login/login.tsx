@@ -21,7 +21,7 @@ export default function Login() {
 
   const history = useHistory()
   const onFinish = (values: any) => {
-    axios.get(`http://localhost:5000/users?username=${values.username}&password=${values.password}&roleState=true&_expand=role`).then(res=>{
+    axios.get(`/users?username=${values.username}&password=${values.password}&roleState=true&_expand=role`).then(res=>{
       if(res.data.length===0){
         message.error("用户和密码不匹配！")
       }else{

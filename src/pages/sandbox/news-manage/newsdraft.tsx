@@ -84,14 +84,14 @@ export default function newsdraft() {
   };
   const deletMethod = (item: any) => {
     setdataSource(dataSource.filter((data: any) => data.id !== item.id));
-    axios.delete(`http://localhost:5000/news/${item.id}`);
+    axios.delete(`/news/${item.id}`);
   };
   const handleUpdate = (item: any) => {
     history.push(`/news-manage/update/${item.id}`);
   };
   const handleCheck = (id: number) => {
     axios
-      .patch(`http://localhost:5000/news/${id}`, {
+      .patch(`/news/${id}`, {
         auditState: 1,
       })
       .then(res => {
@@ -106,7 +106,7 @@ export default function newsdraft() {
   useEffect(() => {
     axios
       .get(
-        `http://localhost:5000/news?author=${username}&auditState=0&_expand=category`,
+        `/news?author=${username}&auditState=0&_expand=category`,
       )
       .then((res) => {
         setdataSource(res.data);

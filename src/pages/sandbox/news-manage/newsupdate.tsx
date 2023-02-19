@@ -10,7 +10,7 @@ import {
 } from 'antd';
 import { useEffect, useRef, useState } from 'react';
 import style from '@/pages/sandbox/news-manage/news.module.css';
-import axios from 'axios';
+import axios from '@/conf/axiosConf';
 import NewsEditor from '@/components/news-manage/NewsEditor';
 import { history } from 'umi';
 const { Option } = Select;

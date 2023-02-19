@@ -1,6 +1,6 @@
 import { Table, Button, Tag, notification } from 'antd';
 import { useEffect, useState } from 'react';
-import axios from 'axios';
+import axios from '@/conf/axiosConf';
 import { history } from 'umi';
 
 export default function auditlist() {

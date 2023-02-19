@@ -1,6 +1,6 @@
 import { Table, Button, Modal, Form, Input } from 'antd';
 import React, { useContext, useEffect, useRef, useState } from 'react';
-import axios from 'axios';
+import axios from '@/conf/axiosConf';
 import { DeleteOutlined, ExclamationCircleFilled } from '@ant-design/icons';
 import type { InputRef } from 'antd';
 import type { FormInstance } from 'antd/es/form';

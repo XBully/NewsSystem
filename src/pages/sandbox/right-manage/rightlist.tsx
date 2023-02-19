@@ -4,7 +4,7 @@ import {
   ExclamationCircleFilled,
 } from '@ant-design/icons';
 import { Table, Tag, Button, Modal, Popover, Switch } from 'antd';
-import axios from 'axios';
+import axios from '@/conf/axiosConf';
 import { useEffect, useState } from 'react';
 
 const { confirm } = Modal;

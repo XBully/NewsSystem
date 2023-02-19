@@ -6,7 +6,7 @@ import {
   ExclamationCircleFilled,
   UploadOutlined,
 } from '@ant-design/icons';
-import axios from 'axios';
+import axios from '@/conf/axiosConf';
 import { history } from 'umi';
 const { confirm } = Modal;
 

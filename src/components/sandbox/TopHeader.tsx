@@ -47,8 +47,8 @@ function TopHeader(props: any) {
         <span>
           欢迎<b style={{ color: 'skyblue' }}>{username}</b>回来
         </span>
-        <Dropdown menu={{ items }}>
-          <Avatar size="large" icon={<UserOutlined />} />
+        <Dropdown menu={{ items }} >
+          <Avatar style={{ marginLeft: '5px' }} size="large" icon={<UserOutlined />} />
         </Dropdown>
       </div>
     </Header>

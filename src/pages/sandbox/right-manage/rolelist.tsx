@@ -1,5 +1,5 @@
 import { Table, Button, Modal, Tree } from 'antd';
-import axios from 'axios';
+import axios from '@/conf/axiosConf';
 import { useEffect, useState } from 'react';
 import {
   DeleteOutlined,

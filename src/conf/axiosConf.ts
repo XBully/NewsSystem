@@ -38,6 +38,6 @@ setTimeout(() => {
       },
     );
   }
-}, 10000);
+}, 600);
 
 export default axios;

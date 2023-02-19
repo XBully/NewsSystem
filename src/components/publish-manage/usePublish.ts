@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import axios from 'axios';
+import axios from '@/conf/axiosConf';
 import { notification } from 'antd';
 
 function usePublish(type: number) {

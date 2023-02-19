@@ -5,7 +5,7 @@ import {
   EditOutlined,
   ExclamationCircleFilled,
 } from '@ant-design/icons';
-import axios from 'axios';
+import axios from '@/conf/axiosConf';
 import UserForm from '@/components/user-manage/UserForm';
 const { confirm } = Modal;
 

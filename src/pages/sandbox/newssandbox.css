@@ -23,4 +23,7 @@
 #root,.ant-layout{
   height: 100vh;
 }
+.ant-spin-nested-loading {
+  overflow: auto;
+}
 

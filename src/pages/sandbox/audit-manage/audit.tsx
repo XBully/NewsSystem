@@ -1,6 +1,6 @@
 import { Table, Button,notification } from 'antd';
 import { useEffect, useState } from 'react';
-import axios from 'axios';
+import axios from '@/conf/axiosConf';
 import {CheckOutlined,CloseOutlined} from '@ant-design/icons'
 
 export default function audit() {

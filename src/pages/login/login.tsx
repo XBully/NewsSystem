@@ -5,7 +5,7 @@ import { useCallback } from 'react';
 import Particles from 'react-particles';
 import type { Container, Engine } from 'tsparticles-engine';
 import { loadFull } from 'tsparticles';
-import axios from 'axios';
+import axios from '@/conf/axiosConf';
 import { useHistory } from 'umi';
 
 export default function Login() {

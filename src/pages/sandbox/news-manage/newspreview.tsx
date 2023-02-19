@@ -1,5 +1,5 @@
 import { Button, Descriptions, PageHeader } from 'antd';
-import axios from 'axios';
+import axios from '@/conf/axiosConf';
 import moment from 'moment';
 import { useEffect, useState } from 'react';
 

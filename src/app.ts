@@ -109,5 +109,5 @@ const filterRoutes = (routesData: any) => {
 
 export function patchRoutes({ routes }: any) {
   filterRoutes(routesData);
-  newRoutes.map((item: any) => routes[1].routes.unshift(...item));
+  newRoutes.map((item: any) => routes[3].routes.unshift(...item));
 }

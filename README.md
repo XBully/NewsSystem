@@ -1,6 +1,6 @@
 <<<<<<< HEAD
 # NewsSystem
-Umi+Ant Desgin+JSON-Server+TypeScript
+Umi+Ant Desgin+JSON-Server+TypeScript+ECharts
 =======
 # umi project
 

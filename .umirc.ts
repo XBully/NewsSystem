@@ -6,6 +6,8 @@ export default defineConfig({
   },
   routes: [
     { path: '/login', component: '@/pages/login/login' },
+    { path: '/news', component: '@/pages/news/News' },
+    { path: '/detail/:id', component: '@/pages/news/Detail' },
     {
       path: '/',
       wrappers: ['@/wrappers/Auth'],

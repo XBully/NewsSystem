@@ -412,7 +412,7 @@
       "publishState": 2,
       "createTime": 1615777743864,
       "star": 1001,
-      "view": 2084,
+      "view": 2086,
       "id": 1,
       "publishTime": 1615778496314
     },
@@ -426,8 +426,8 @@
       "auditState": 2,
       "publishState": 2,
       "createTime": 1615778694831,
-      "star": 500,
-      "view": "[object Object]1111111111",
+      "star": 502,
+      "view": 228,
       "id": 2,
       "publishTime": 1615778911028
     },
@@ -499,7 +499,7 @@
       "author": "admin",
       "roleId": 1,
       "auditState": 2,
-      "publishState": 2,
+      "publishState": 3,
       "createTime": 1615778852584,
       "star": 317,
       "view": 538,
